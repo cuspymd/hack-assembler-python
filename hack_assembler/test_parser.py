@@ -51,3 +51,41 @@ class TestParser(unittest.TestCase):
         parser = Parser("(LOOP)")
         parser.advance()
         self.assertEqual(parser.instructionType(), InstructionType.L_INSTRUCTION)
+
+    def test_symbol_given_a_instruction(self):
+        parser = Parser("@01")
+        parser.advance()
+        self.assertEqual(parser.symbol(), "01")
+
+    def test_symbol_given_l_instruction(self):
+        parser = Parser("(LOOP)")
+        parser.advance()
+        self.assertEqual(parser.symbol(), "LOOP")
+
+    def test_c_instruction_given_dest(self):
+        parser = Parser("M=1")
+        parser.advance()
+        self.assertEqual(parser.dest(), "M")
+        self.assertEqual(parser.comp(), "1")
+        self.assertEqual(parser.jump(), "")
+
+    def test_c_instruction_given_JMP(self):
+        parser = Parser("0;JMP")
+        parser.advance()
+        self.assertEqual(parser.dest(), "")
+        self.assertEqual(parser.comp(), "0")
+        self.assertEqual(parser.jump(), "JMP")
+
+    def test_c_instruction_given_comp(self):
+        parser = Parser("D+1")
+        parser.advance()
+        self.assertEqual(parser.dest(), "")
+        self.assertEqual(parser.comp(), "D+1")
+        self.assertEqual(parser.jump(), "")
+
+    def test_c_instruction_given_all(self):
+        parser = Parser("ADM=D+1;JGT")
+        parser.advance()
+        self.assertEqual(parser.dest(), "ADM")
+        self.assertEqual(parser.comp(), "D+1")
+        self.assertEqual(parser.jump(), "JGT")

@@ -34,3 +34,15 @@ class Parser:
 
     def instructionType(self) -> InstructionType:
         return self.current_instruction.instruction_type
+
+    def symbol(self) -> str:
+        return self.current_instruction.symbol
+
+    def dest(self) -> str:
+        return self.current_instruction.dest
+
+    def comp(self) -> str:
+        return self.current_instruction.comp
+
+    def jump(self) -> str:
+        return self.current_instruction.jump
