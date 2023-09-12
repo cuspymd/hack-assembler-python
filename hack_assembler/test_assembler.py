@@ -19,5 +19,4 @@ class TestAssembler(unittest.TestCase):
         with open(OUT_FILE, 'r') as file:
             output_text = file.read()
 
-        os.remove(OUT_FILE)
         self.assertEqual(output_text, solution_text)
