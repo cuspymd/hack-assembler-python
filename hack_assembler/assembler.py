@@ -1,4 +1,5 @@
 import os
+import sys
 from hack_assembler.parser import Parser
 from hack_assembler.instruction import InstructionType
 from hack_assembler.code import Code
@@ -33,3 +34,9 @@ def run(input_path: str):
                     jump = parser.jump()
                     jump = code.jump(jump)
                     file.write(f"111{comp}{dest}{jump}\n")
+
+
+if __name__ == "__main__":
+    print(f"Start assembling for '{sys.argv[1]}'")
+    run(sys.argv[1])
+    print("Completed")
