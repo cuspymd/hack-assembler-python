@@ -1,6 +1,6 @@
 import unittest
 import os
-import hack_assembler.assembler as assembler
+from hack_assembler.assembler import Assembler
 
 
 class TestAssembler(unittest.TestCase):
@@ -8,6 +8,12 @@ class TestAssembler(unittest.TestCase):
         self._test_assembler("./test_data/RectL.asm")
         self._test_assembler("./test_data/Add.asm")
         self._test_assembler("./test_data/MaxL.asm")
+        self._test_assembler("./test_data/PongL.asm")
+
+    def test_assembler_given_symbol(self):
+        self._test_assembler("./test_data/Rect.asm")
+        self._test_assembler("./test_data/Max.asm")
+        self._test_assembler("./test_data/Pong.asm")
 
     def _test_assembler(self, input_path: str):
         folder_path, file_name = os.path.split(input_path)
@@ -18,7 +24,7 @@ class TestAssembler(unittest.TestCase):
         if os.path.exists(OUT_FILE):
             os.remove(OUT_FILE)
 
-        assembler.run(input_path)
+        Assembler().run(input_path)
         self.assertTrue(os.path.exists(OUT_FILE))
 
         with open(SOLUTION_FILE, 'r') as solution_file:

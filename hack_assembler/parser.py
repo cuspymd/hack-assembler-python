@@ -18,12 +18,13 @@ class Parser:
         ]
 
     def _get_valid_text(self, text: str) -> str:
-        strip_text = text.strip()
         COMMENT_ID = "//"
-        if COMMENT_ID in strip_text:
-            return strip_text.split(COMMENT_ID)[0]
+        if COMMENT_ID in text:
+            valid_text = text.split(COMMENT_ID)[0]
         else:
-            return strip_text
+            valid_text = text
+
+        return valid_text.strip()
 
     def has_more_lines(self):
         return self.current_line_number < len(self.lines)-1
