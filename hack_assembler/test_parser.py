@@ -84,7 +84,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(parser.jump(), "")
 
     def test_c_instruction_given_all(self):
-        parser = Parser("ADM=D+1;JGT")
+        parser = Parser("ADM=D+1;JGT    // comment")
         parser.advance()
         self.assertEqual(parser.dest(), "ADM")
         self.assertEqual(parser.comp(), "D+1")
